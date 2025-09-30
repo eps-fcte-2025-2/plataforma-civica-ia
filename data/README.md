@@ -9,11 +9,6 @@ Este diretório contém datasets públicos utilizados para treinar um classifica
 | SMS Spam Collection | [UCI](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection) | TXT/CSV | EN (traduzível p/ PT) | Research | SMS     | 5.574 mensagens               |
 | Enron Spam Dataset | [CMU](https://www.cs.cmu.edu/~enron/)                              | TXT     | EN     | Research  | E-mails | ~500.000 e-mails               |
 | Spambase           | [UCI](https://archive.ics.uci.edu/dataset/94/spambase)            | CSV     | EN     | CC BY 4.0 | E-mails | 4.601 instâncias / 58 atributos |
-
-## Datasets Adicionais (Spam, Abuso e Conteúdo Tóxico)
-
-| Nome                                | Link                                                                                                           | Formato | Idioma  | Licença | Tipo        | Tamanho           |
-|-------------------------------------|----------------------------------------------------------------------------------------------------------------|---------|---------|---------|-------------|-------------------|
 | YouTube Spam Collection             | [UCI](https://archive.ics.uci.edu/dataset/380/youtube+spam+collection)                                        | CSV     | EN      | Research| Comentários | 1.956 comentários |
 | Hate Speech and Offensive Language  | [Kaggle](https://www.kaggle.com/datasets/mfaaris/hate-speech-and-offensive-language-dataset)                  | CSV     | EN      | Varia   | Tweets      | ~25.000 tweets    |
 | Brazilian Portuguese Hate Speech    | [Hugging Face](https://huggingface.co/datasets/pucpr-br/hate-speech-twitter-portuguese)                        | CSV     | PT-BR   | Varia   | Tweets      | ~6.900 tweets     |
