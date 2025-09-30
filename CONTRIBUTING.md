@@ -1,20 +1,10 @@
 # Contribuindo para o projeto
 
-Obrigado por contribuir! 🙏  
+Obrigado por contribuir! 🙏
 Este documento descreve como colaborar de forma segura, eficiente e reprodutível no projeto — incluindo padrões de commits, pull requests e requisitos mínimos de qualidade.
 
 > Aviso importante sobre dados sensíveis  
 > Nunca envie dados reais de denúncias ao repositório público. Use dados sintéticos ou amostras anonimizadas. Para problemas sensíveis ou vazamentos, contate o time responsável imediatamente.
-
----
-
-## Sumário
-- [Código de Conduta](#código-de-conduta)
-- [Como perguntar / tirar dúvidas](#como-perguntar--tirar-dúvidas)
-- [Fluxo de trabalho Git (branching)](#fluxo-de-trabalho-git-branching)
-- [Mensagens de Commit](#mensagens-de-commit)
-- [Template de Pull Request](#template-de-pull-request)
-- [Contato / Team roles](#contato--team-roles)
 
 ---
 
