@@ -64,30 +64,3 @@ Este fluxo mostra como os textos são agrupados automaticamente para descobrir p
 Este fluxograma define o ciclo de vida de uma denúncia para garantir a conformidade com a LGPD, desde a detecção e tratamento de dados pessoais até a aplicação de políticas de retenção e exclusão.
 
 ![Fluxo de privacidade](./fluxo-de-dados-pipeline-privacidade.png)
-
----
-
-## Como atualizar os diagramas
-
-Recomendações rápidas para manter diagramas consistentes e auditáveis:
-
-1. **Editar fonte**  
-    - Editar o arquivo fonte `docs/diagramas/<nome>.mmd` (Mermaid) correspondente.
-
-2. **Gerar imagem (Mermaid CLI)**  
-    - Usar [Mermaid Chart](https://www.mermaidchart.com/) ou [Mermaid CLI](https://github.com/mermaid-js/mermaid-cli)
-    - Exemplo com Mermaid CLI: `mmdc -i docs/diagramas/fluxo-de-dados-geral.mmd -o docs/diagramas/fluxo-de-dados-geral.png`
-
-3. **Commitar ambos os arquivos (fonte + imagem)**  
-    - Mensagem de commit sugerida:  
-    
-    ```
-    docs(diagrams): update fluxo-de-dados-geral (mermaid + png)
-    ```
-
-4. **Abrir Pull Request**  
-    - Título sugerido do PR: `docs(diagrams): atualizar <nome-diagrama> — motivo curto`  
-    - No PR inclua: descrição da alteração, captura da imagem nova e menção ao líder se o diagrama impacta operação/privacidade.
-
-5. **Revisão e merge**  
-    - Para diagramas de impacto (privacidade, retenção, fluxo de dados), atribuir obrigatoriamente a revisão do PR ao líder de IA.
