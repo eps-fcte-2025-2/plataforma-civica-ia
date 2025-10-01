@@ -6,7 +6,7 @@ Este módulo integra recursos de Inteligência Artificial ao Apita Cidadão, ofe
 
 ---
 
-## Visão geral (o que temos até o momento)
+## Visão geral (em andamento)
 
 Principais componentes em planejamento:
 
@@ -77,3 +77,4 @@ Onde um cluster (agrupamento de denúncias similares) que cresce rapidamente ou 
 ## Boas Práticas de Contribuição
 
 Siga o nosso [GUIA DE CONTRIBUIÇÃO](CONTRIBUTING.md). Ele define nosso fluxo de trabalho, padrão de commits semânticos e template de Pull Request.
+
