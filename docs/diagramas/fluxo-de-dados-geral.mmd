@@ -1,0 +1,68 @@
+%% Diagrama de Fluxo de Dados Geral - Apita Cidadão
+flowchart LR
+    %% Definição de Atores e Repositórios de Dados
+    Analista["<i class='fa fa-user-shield'></i> Policial Federal / Analista"]
+    DB_KEYWORDS[(<i class='fa fa-database'></i> D1: Palavras-Chave)]
+    DB_DENUNCIAS[(<i class='fa fa-database'></i> D2: Banco de Denúncias)]
+    DB_VECTOR[(<i class='fa fa-database'></i> D3: Vector DB)]
+    DB_KNOWLEDGE[(<i class='fa fa-database'></i> D4: Base de Conhecimento)]
+
+    %% 1. Bloco de Ingestão
+    subgraph INGESTAO["1.Ingestão"]
+        A["<i class='fa fa-bullhorn'></i> Fonte da Denúncia <br> (API / App Cívico)"] --> B["<i class='fa fa-server'></i> Serviço de Ingestão"]
+    end
+
+    %% 2. Bloco de Pré-processamento e Filtragem
+    subgraph PRE["2.Pré-processamento e Filtragem"]
+        B --> C["<i class='fa fa-filter'></i> Filtro Rápido (Keywords)"]
+        C -- "|Bloqueado|" --> D["<i class='fa fa-trash-alt'></i> Quarentena / Descarte"]
+        C -- "|Aprovado|" --> E["<i class='fa fa-magic'></i> Limpeza e Anonimização"]
+        C -.-> DB_KEYWORDS
+    end
+
+    %% 3. Bloco de Classificação com IA
+    subgraph CLASS["3.Classificação de Relevância (IA)"]
+        E --> F["<i class='fa fa-brain'></i> Classificador (SPAM / Relevante)"]
+        F -- "|SPAM|" --> D
+        F -- "|Relevante|" --> G["<i class='fa fa-check-circle'></i> Denúncia Aprovada"]
+        F -- "|Incerteza|" --> H["<i class='fa fa-user-edit'></i> Fila de Revisão Humana"]
+    end
+
+    %% 4. Bloco de Análise e Resposta (RAG)
+    subgraph RAG["4.Análise e Resposta (RAG)"]
+        G -- "|Salva Metadados|" --> DB_DENUNCIAS
+        G -- "|Gera e Indexa Embedding|" --> DB_VECTOR
+        I["<i class='fa fa-search'></i> Retriever (Busca Vetorial)"] --> J["<i class='fa fa-file-code'></i> Montagem de Contexto e Prompt"]
+        J --> K["<i class='fa fa-rocket'></i> LLM (Gemini Pro)"]
+        K --> L["<i class='fa fa-comment-dots'></i> Resposta Fundamentada + Fontes"]
+        
+        G --> I
+        I -.-> DB_VECTOR
+        I -.-> DB_KNOWLEDGE
+    end
+
+    %% 5. Bloco de Operação e Análise
+    subgraph OPS["5.Operação e Análise (Dashboards)"]
+        M["<i class='fa fa-chart-bar'></i> Dashboard de Análise"]
+        D -- "|Métricas de Spam|" --> M
+        H -- "|Métricas de Revisão|" --> M
+        DB_DENUNCIAS -- "|Dados Agregados|" --> M
+        L -- "|Resultados da Análise|" --> M
+    end
+    
+    %% Conexões do Analista
+    Analista -- "|Revisa|" --> H
+    Analista -- "|Acessa|" --> M
+
+    %% Estilização
+    style INGESTAO fill:#f8f9fa,stroke:#333,stroke-width:1
+    style PRE fill:#fff3cd,stroke:#333,stroke-width:1
+    style CLASS fill:#d1ecf1,stroke:#333,stroke-width:1
+    style RAG fill:#e2e3e5,stroke:#333,stroke-width:1
+    style OPS fill:#d4edda,stroke:#333,stroke-width:1
+    style DB_KEYWORDS fill:#f0e6ff,stroke:#6c757d
+    style DB_DENUNCIAS fill:#f0e6ff,stroke:#6c757d
+    style DB_VECTOR fill:#f0e6ff,stroke:#6c757d
+    style DB_KNOWLEDGE fill:#f0e6ff,stroke:#6c757d
+    style Analista fill:#fff,stroke:#007bff
+

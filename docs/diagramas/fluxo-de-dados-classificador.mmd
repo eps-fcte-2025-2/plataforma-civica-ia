@@ -1,0 +1,45 @@
+%% Diagrama de Fluxo de Classificação de Denúncias - Apita Cidadão
+flowchart LR
+    %% 1. Bloco de Ingestão
+    subgraph INGESTAO[Ingestão]
+        A["Fonte da Denúncia <br> (API / App)"] -- "|POST /v1/denuncia|" --> B[Serviço de Ingestão]
+    end
+
+    %% 2. Bloco de Pré-processamento
+    subgraph PRE_PROCESSAMENTO[Pré-processamento e Filtragem]
+        B --> C["Filtro Rápido (Keywords)"]
+        C -- "|Spam Identificado|" --> D[Quarentena + Métricas]
+        C -- "|Passou no Filtro|" --> E[Limpeza e Anonimização]
+    end
+
+    %% 3. Bloco de Classificação
+    subgraph CLASSIFICACAO["Classificação com IA"]
+        E --> F["Classificador (SPAM / Relevante)"]
+        F -- "|SPAM|" --> D
+        F -- "|Relevante|" --> G[Encaminhar para o RAG Flow]
+        F -- "|Incerteza|" --> H[Fila de Revisão Humana]
+    end
+
+    %% 4. Bloco do RAG Flow
+    subgraph RAGFLOW["RAG Flow (Análise e Resposta)"]
+        G --> I["Retriever (Busca Vetorial)"]
+        I --> J["Montagem de Contexto e Prompt"]
+        J --> K["LLM (Gemini Pro)"]
+        K --> L["Resposta Fundamentada + Fontes"]
+    end
+
+    %% 5. Bloco de Análise e Operação
+    subgraph ANALYTICS[Análise e Operação]
+        M[Dashboard de Análise]
+        L -- "Resultados" --> M
+        I -- "Dados de Busca" --> M
+        F -- "Métricas do Classificador" --> M
+        D -- "Métricas de Spam" --> M
+    end
+
+    %% Estilização dos blocos
+    style INGESTAO fill:#f8f9fa,stroke:#333,stroke-width:1
+    style PRE_PROCESSAMENTO fill:#fff3cd,stroke:#333
+    style CLASSIFICACAO fill:#d1ecf1,stroke:#333
+    style RAGFLOW fill:#e2e3e5,stroke:#333
+    style ANALYTICS fill:#d4edda,stroke:#333
