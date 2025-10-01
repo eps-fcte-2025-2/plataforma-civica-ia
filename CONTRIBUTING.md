@@ -22,14 +22,13 @@ Este projeto segue o [Pacto de Código de Conduta para Colaboradores v2.1](https
 ---
 
 ## Fluxo de trabalho Git (branching)
-- `main` — código em produção / pronto para deploy. Protegido.
-- `develop` — integração e staging.
-- `feat/<desc-curta>` — novas funcionalidades.
-- `fix/<desc-curta>` — correções de bugs.
-- `chore/<desc-curta>` — manutenção, atualização de dependências.
-- `data/<desc-curta>` — alterações relacionadas a scripts/metadados de dados.
+- `main` — código pronto para deploy. Protegido.
+- `feat/<numero-issue>-<desc-curta>` — novas funcionalidades.
+- `fix/<numero-issue>-<desc-curta>` — correções de bugs.
+- `chore/<numero-issue>-<desc-curta>` — manutenção, atualização de dependências.
+- `data/<numero-issue>-<desc-curta>` — alterações relacionadas a scripts/metadados de dados.
 
-Nome exemplo: `feat/classificador-spam`
+Nome exemplo: `feat/3-classificador-spam`
 
 Regras:
 - Cada branch corresponde a uma issue. Associe o número da issue no título do PR (ex.: `feat: adicionar filtro de keywords (#123)`).
