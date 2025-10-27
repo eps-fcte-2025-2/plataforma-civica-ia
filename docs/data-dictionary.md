@@ -26,8 +26,8 @@ Entidade principal que representa uma denúncia de manipulação.
 
 **Relacionamentos:**
 - 1:N com `Partida` (uma denúncia pode ter várias partidas)
-- N:N com `Clube` (uma denúncia pode envolver vários clubes)
-- N:N com `Pessoa` (uma denúncia pode envolver várias pessoas)
+- 1:N com `Clube` (uma denúncia pode envolver vários clubes)
+- 1:N com `Pessoa` (uma denúncia pode envolver várias pessoas)
 - 1:N com `DenunciaFoco` (uma denúncia pode ter vários focos de manipulação)
 - 1:N com `Evidencia` (uma denúncia pode ter várias evidências)
 
@@ -116,4 +116,4 @@ Representa uma evidência anexada a uma denúncia.
 
 | Data | Versão | Descrição | Autor | Revisor |
 | ---- | ------ | --------- | ----- | ------- |
-| 2025-10-22 | 1.0 | Versão inicial do dicionário de dados com mapeamento de entidades | [Ana Luiza Hoffmann Ferreira](https://github.com/AnHoff) | [Pedro Lucas](https://github.com/AlefMemTav  |
+| 2025-10-22 | 1.0 | Versão inicial do dicionário de dados com mapeamento de entidades | [Ana Luiza Hoffmann Ferreira](https://github.com/AnHoff) | [Pedro Lucas](https://github.com/AlefMemTav)  |
