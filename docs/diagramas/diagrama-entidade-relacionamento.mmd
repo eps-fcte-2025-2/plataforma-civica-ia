@@ -1,0 +1,74 @@
+---
+config:
+  layout: dagre
+---
+erDiagram
+	direction TB
+	Denuncia {
+		String id PK "UUID"  
+		TipoDenuncia tipoDenuncia  ""  
+		String descricao  ""  
+		ComoSoube comoSoube  "nullable"  
+		PontualOuDisseminado pontualOuDisseminado  ""  
+		Frequencia frequencia  ""  
+		DateTime dataDenuncia  ""  
+		ReportStatus status  ""  
+		String observacoes  "nullable"  
+		String municipio  ""  
+		String uf  ""  
+	}
+	Partida {
+		String id PK "UUID"  
+		String torneio  ""  
+		DateTime dataPartida  ""  
+		String localPartida  ""  
+		String timeA  "nullable"  
+		String timeB  "nullable"  
+		String observacoes  "nullable"  
+		String municipio  ""  
+		String uf  ""  
+		String denunciaId FK "UUID"  
+	}
+	Pessoa {
+		String id PK "UUID"  
+		String nomePessoa  ""  
+		String funcaoPessoa  ""  
+		String denunciaId  "nullable, FK, UUID"  
+	}
+	Clube {
+		String id PK "UUID"  
+		String nomeClube  ""  
+		String denunciaId  "nullable, FK, UUID"  
+	}
+	DenunciaFoco {
+		String id PK "UUID"  
+		FocoManipulacao foco  ""  
+		String denunciaId FK "UUID"  
+	}
+	Evidencia {
+		String id PK "UUID"  
+		String nomeOriginal  ""  
+		String nomeArquivo  ""  
+		String caminhoArquivo  ""  
+		Int tamanhoBytes  ""  
+		String mimeType  ""  
+		TipoEvidencia tipo  ""  
+		String descricao  "nullable"  
+		DateTime dataUpload  ""  
+		String denunciaId FK "UUID"  
+	}
+	User {
+		String id PK "CUID"  
+		String name  ""  
+		String email  "unique"  
+		String passwordHash  ""  
+		UserRole role  ""  
+		DateTime createdAt  ""  
+		DateTime updatedAt  ""  
+	}
+
+	Denuncia||--o{Partida:"contém"
+	Denuncia||--o{Pessoa:"envolve"
+	Denuncia||--o{Clube:"envolve"
+	Denuncia||--o{DenunciaFoco:"tem"
+	Denuncia||--o{Evidencia:"possui"
