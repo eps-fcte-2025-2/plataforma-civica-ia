@@ -4,6 +4,8 @@ Este documento descreve as entidades, atributos, tipos de dados e relacionamento
 
 ## Entidades
 
+![Diagrama Entidade-Relacionamento](https://github.com/eps-fcte-2025-2/plataforma-civica-ia/blob/docs/8-Add-Dicionario-Dados/docs/diagramas/diagrama-entidade-relacionamento.png)
+
 ### Denuncia (Denúncia)
 
 Entidade principal que representa uma denúncia de manipulação.
@@ -114,4 +116,4 @@ Representa uma evidência anexada a uma denúncia.
 
 | Data | Versão | Descrição | Autor | Revisor |
 | ---- | ------ | --------- | ----- | ------- |
-| 2025-10-22 | 1.0 | Versão inicial do dicionário de dados com mapeamento de entidades | [Ana Luiza Hoffmann Ferreira](https://github.com/AnHoff) |  |
+| 2025-10-22 | 1.0 | Versão inicial do dicionário de dados com mapeamento de entidades | [Ana Luiza Hoffmann Ferreira](https://github.com/AnHoff) | [Pedro Lucas](https://github.com/AlefMemTav  |
