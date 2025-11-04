@@ -113,28 +113,35 @@ def split_dataframe(df: pd.DataFrame, seed: int = 42, ratios: Tuple[float, float
 
 
 def process_file(input_path: str, output_dir: str, seed: int = 42) -> None:
-    os.makedirs(output_dir, exist_ok=True)
-    df = pd.read_csv(input_path)
-    processed = prepare_dataframe(df)
-    # salvar processed full
-    full_path = os.path.join(output_dir, "processed.csv")
-    processed.to_csv(full_path, index=False, quoting=csv.QUOTE_MINIMAL)
+    try:
+        os.makedirs(output_dir, exist_ok=True)
+        df = pd.read_csv(input_path)
+        processed = prepare_dataframe(df)
+        
+        # salvar processed full
+        full_path = os.path.join(output_dir, "processed.csv")
+        processed.to_csv(full_path, index=False, quoting=csv.QUOTE_MINIMAL)
 
-    # gerar splits
-    train, val, test = split_dataframe(processed, seed=seed)
-    train.to_csv(os.path.join(output_dir, "train.csv"), index=False, quoting=csv.QUOTE_MINIMAL)
-    val.to_csv(os.path.join(output_dir, "val.csv"), index=False, quoting=csv.QUOTE_MINIMAL)
-    test.to_csv(os.path.join(output_dir, "test.csv"), index=False, quoting=csv.QUOTE_MINIMAL)
+        # gerar splits
+        train, val, test = split_dataframe(processed, seed=seed)
+        train.to_csv(os.path.join(output_dir, "train.csv"), index=False, quoting=csv.QUOTE_MINIMAL)
+        val.to_csv(os.path.join(output_dir, "val.csv"), index=False, quoting=csv.QUOTE_MINIMAL)
+        test.to_csv(os.path.join(output_dir, "test.csv"), index=False, quoting=csv.QUOTE_MINIMAL)
 
-    # log
-    log_path = os.path.join(output_dir, "process_log.txt")
-    with open(log_path, "w", encoding="utf-8") as f:
-        f.write(f"input_file: {input_path}\n")
-        f.write(f"n_total: {len(processed)}\n")
-        f.write(f"n_train: {len(train)}\n")
-        f.write(f"n_val: {len(val)}\n")
-        f.write(f"n_test: {len(test)}\n")
-        f.write(f"seed: {seed}\n")
+        # log
+        log_path = os.path.join(output_dir, "process_log.txt")
+        with open(log_path, "w", encoding="utf-8") as f:
+            f.write(f"input_file: {input_path}\n")
+            f.write(f"n_total: {len(processed)}\n")
+            f.write(f"n_train: {len(train)}\n")
+            f.write(f"n_val: {len(val)}\n")
+            f.write(f"n_test: {len(test)}\n")
+            f.write(f"seed: {seed}\n")
+    
+    except (FileNotFoundError, pd.errors.ParserError, pd.errors.EmptyDataError) as e:
+        raise ValueError(f"Erro ao processar arquivo {input_path}: {str(e)}")
+    except Exception as e:
+        raise RuntimeError(f"Erro inesperado no processamento: {str(e)}")
 
 
 def main():
