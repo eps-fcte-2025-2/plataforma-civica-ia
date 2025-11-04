@@ -1,0 +1,35 @@
+%% Diagrama de Fluxo da Pipeline de Pré-processamento de Texto - Apita Cidadão
+flowchart TD
+
+    %% 1. Bloco de Validação e Privacidade
+    subgraph Validação_e_Privacidade ["1.Validação e Privacidade"]
+        A["<i class='fa fa-keyboard'></i> Entrada Bruta (texto da denúncia)"] --> B["<i class='fa fa-check-square'></i> 1. Validar Schema (API)"]
+        B --> C{"<i class='fa fa-user-secret'></i> 2. Contém Dados Pessoais (PII)?"}
+        C -- Sim --> D["<i class='fa fa-search'></i> 3a. Detector de Dados Pessoais (NER)"]
+        D --> E["<i class='fa fa-eraser'></i> 3b. Anonimização / Mascaramento"]
+    end
+
+    %% 2. Bloco de Limpeza e Normalização
+    subgraph Limpeza_e_Normalização ["2.Limpeza e Normalização"]
+        F["<i class='fa fa-magic'></i> 4. Normalização do Texto<br>(minúsculas, acentos)"] --> J["<i class='fa fa-cogs'></i> 5. Tokenização e<br>Remoção de Stopwords"]
+    end
+    
+    %% 3. Bloco de Armazenamento e Preparação para IA
+    subgraph Armazenamento_e_Preparação_para_IA ["3.Armazenamento e Preparação para IA"]
+        K["<i class='fa fa-archive'></i> 6. Armazenar Texto Processado"] --> L["<i class='fa fa-database'></i> /data/processed"]
+        K --> M["<i class='fa fa-sitemap'></i> 7. Divisão para Experimentos"]
+        M --> N["treino / validação / teste"]
+    end
+
+    %% Conexões entre blocos
+    C -- Não --> F
+    E --> F
+    J --> K
+
+    %% Estilização
+    style Validação_e_Privacidade fill:#f8f9fa,stroke:#333
+    style Limpeza_e_Normalização fill:#fff3cd,stroke:#333
+    style Armazenamento_e_Preparação_para_IA fill:#d1ecf1,stroke:#333
+    style L fill:#f0e6ff,stroke:#6c757d
+    style N fill:#f0e6ff,stroke:#6c757d
+

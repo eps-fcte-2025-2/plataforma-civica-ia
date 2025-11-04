@@ -1,0 +1,27 @@
+%% Diagrama de Fluxo da Pipeline Analítica de Clusterização - Apita Cidadão
+flowchart TD
+
+    %% Bloco 1: Preparação dos Dados
+    subgraph "1.Preparação dos Dados Vetoriais"
+        A["<i class='fa fa-file-alt'></i> Textos Processados e Limpos"] --> B["<i class='fa fa-project-diagram'></i> Pipeline de Geração de Embeddings"]
+        B --> C["<i class='fa fa-compress-arrows-alt'></i> Redução de Dimensionalidade (UMAP)"]
+    end
+
+    %% Bloco 2: Análise e Descoberta de Padrões
+    subgraph "2.Análise e Descoberta de Padrões"
+        C --> D["<i class='fa fa-braille'></i> <strong>Algoritmo de Clusterização</strong><br>(HDBSCAN / k-means)"]
+        D --> E["<i class='fa fa-tags'></i> <strong>Extração de Metadados do Cluster</strong><br>(Termos principais, tamanho, crescimento)"]
+    end
+
+    %% Bloco 3: Ação, Visualização e Feedback
+    subgraph "3.Ação, Visualização e Feedback"
+        E --> F["<i class='fa fa-chart-bar'></i> <strong>Dashboard</strong><br>(Mapa de calor, principais clusters)"]
+        E --> G["<i class='fa fa-bell'></i> <strong>Sistema de Alertas</strong><br>(Taxa de crescimento > limite)"]
+        F --> H["<i class='fa fa-user-shield'></i> Análise Humana (Investigadores)"]
+        H --> I["<i class='fa fa-sync-alt'></i> <strong>Rotulagem e Feedback</strong><br>(Para retreino e reindexação do RAG)"]
+    end
+    
+    %% Estilização
+    style A fill:#e3f2fd,stroke:#1976d2
+    style D fill:#d1ecf1,stroke:#0c5460
+    style I fill:#d4edda,stroke:#155724

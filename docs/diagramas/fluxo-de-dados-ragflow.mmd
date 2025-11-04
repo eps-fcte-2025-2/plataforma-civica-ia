@@ -1,0 +1,46 @@
+%% Diagrama de Fluxo de Tarefas do RAGFlow - Apita Cidadão
+flowchart TD
+    %% Bloco 1: Recuperação e Montagem de Contexto
+    subgraph subGraph0["1.Recuperação e Contexto"]
+        B@{ label: "<i class=\"fa fa-search\"></i> <strong>Retriever</strong><br>(Busca Vetorial <i>top-k</i> no Vector DB)" }
+        A@{ label: "<i class=\"fa fa-question-circle\"></i> Pergunta do Usuário (Query)" }
+        C@{ label: "<i class=\"fa fa-list-ol\"></i> Seleção dos Documentos Relevantes" }
+        D@{ label: "<i class=\"fa fa-cogs\"></i> <strong>Montagem do Contexto</strong><br>(Truncar, reordenar, criar snippets)" }
+    end
+ 
+    %% Bloco 2: Geração com o LLM
+    subgraph subGraph1["2.Geração com LLM"]
+        E@{ label: "<i class=\"fa fa-file-code\"></i> <strong>Template de Prompt</strong><br>+ Filtros de Segurança" }
+        F@{ label: "<i class=\"fa fa-rocket\"></i> <strong>Adapter do LLM</strong><br>(Chamada para API do Gemini Pro)" }
+        G@{ label: "<i class=\"fa fa-comment-alt\"></i> Resposta Bruta do LLM" }
+    end
+
+    %% Bloco 3: Pós-processamento e Entrega
+    subgraph subGraph2["3.Pós-processamento"]
+          H@{ label: "<i class=\"fa fa-magic\"></i> <strong>Pós-processamento</strong><br>(Citar fontes, remover PII)" }
+          I@{ label: "<i class=\"fa fa-check-circle\"></i> <strong>Resposta Final para o Cliente</strong><br>(Com log de <i>request_id</i>)" }
+    end
+    
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+    H --> I
+
+    A@{ shape: rect}
+    B@{ shape: rect}
+    C@{ shape: rect}
+    D@{ shape: rect}
+    E@{ shape: rect}
+    F@{ shape: rect}
+    G@{ shape: rect}
+    H@{ shape: rect}
+    I@{ shape: rect}
+    style A fill:#e3f2fd,stroke:#1976d2
+    style I fill:#e8f5e9,stroke:#2e7d32
+
+
+

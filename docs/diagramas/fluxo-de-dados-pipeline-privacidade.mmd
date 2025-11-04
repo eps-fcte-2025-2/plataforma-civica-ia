@@ -1,0 +1,33 @@
+%% Diagrama de Fluxo da Pipeline de Privacidade e Retenção de Dados - Apita Cidadão
+flowchart TD
+
+    %% Bloco 1: Detecção e Tratamento de Dados Pessoais
+    subgraph "1.Detecção e Tratamento"
+        A["<i class='fa fa-keyboard'></i> Entrada de Dados Brutos (via API)"] --> B["<i class='fa fa-user-secret'></i> <strong>Detecção de Dados Pessoais (PII)</strong><br>com modelo NER"]
+        B --> C{"<i class='fa fa-question-circle'></i> Dados Pessoais Encontrados?"}
+        C -- Sim --> D["<i class='fa fa-eraser'></i> <strong>Anonimização / Mascaramento do Texto</strong>"]
+        C -- Não --> E["<i class='fa fa-archive'></i> <strong>Armazenar Metadados Mínimos</strong><br>(ID, timestamp, classificação)"]
+        D --> E
+    end
+
+    %% Bloco 2: Armazenamento Seguro
+    subgraph "2.Armazenamento Seguro"
+        E --> DB1[(<i class='fa fa-database'></i> Banco de Metadados)]
+        D --> F["<i class='fa fa-file-archive'></i> <strong>Armazenar Artefato Original</strong><br>em armazenamento seguro"]
+        F -.-> |"Referenciado por Hash"| DB1
+    end
+
+    %% Bloco 3: Governança e Ciclo de Vida
+    subgraph "3.Governança e Ciclo de Vida"
+        G["<i class='fa fa-users-cog'></i> <strong>Controle de Acesso (RBAC)</strong><br>+ Logs de Auditoria"]
+        H["<i class='fa fa-calendar-times'></i> <strong>Política de Retenção</strong><br>(Exclusão Automática em X dias)"]
+        DB1 -- "Acesso controlado por" --> G
+        F -- "Acesso controlado por" --> G
+        G -- "Aciona política de" --> H
+    end
+    
+    %% Estilização
+    style B fill:#d1ecf1,stroke:#0c5460
+    style D fill:#f5c6cb,stroke:#721c24
+    style G fill:#d4edda,stroke:#155724
+    style H fill:#e2e3e5,stroke:#383d41
