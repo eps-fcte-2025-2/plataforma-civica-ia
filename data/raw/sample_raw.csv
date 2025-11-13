@@ -1,0 +1,4 @@
+text,label,source
+"Olá, mundo!","greeting","synthetic"
+"<p>Exemplo com <b>HTML</b> e acentuação: ação, cão.</p>","example","synthetic"
+"Outra linha sem rótulo","","synthetic"
