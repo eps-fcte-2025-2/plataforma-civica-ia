@@ -1,15 +1,18 @@
+import logging
 import pandas as pd
 import requests
+from requests.exceptions import RequestException
 import torch
 import os
 import time
 import re
 from typing import List, Dict
 from transformers import MarianMTModel, MarianTokenizer
-
+from dotenv import load_dotenv
 
 class DatasetTranslator:
     def __init__(self, api_key: str):
+        self.logger = logging.getLogger(__name__)
         self.api_key = api_key
         self.api_url = "https://api.deepseek.com/v1/chat/completions"
         self.transformers_model = "Helsinki-NLP/opus-mt-tc-big-en-pt"
@@ -62,8 +65,8 @@ class DatasetTranslator:
                 if r.status_code == 200:
                     return r.json()['choices'][0]['message']['content'].strip()
                 time.sleep(2)
-            except Exception as e:
-                print(f"Tentativa {attempt + 1} falhou: {e}")
+            except RequestException as e:
+                self.logger.warning("Tentativa %d falhou: %s", attempt + 1, e)
                 time.sleep(2)
 
         return text  # fallback
@@ -73,16 +76,17 @@ class DatasetTranslator:
         if sample_size:
             df = df.head(sample_size)
 
-        print(f"Iniciando tradução de {len(df)} registros com DeepSeek API...")
+        self.logger.info("Iniciando tradução de %d registros com DeepSeek API...", len(df))
         df["translated_text"] = ""
         translations_log = []
 
         for i, row in df.iterrows():
             text = row["text"]
-            print(f"Traduzindo {i + 1}/{len(df)}...")
+            self.logger.debug("Traduzindo %d/%d...", i+1, len(df))
             translated = self.translate_text(text)
 
             df.at[i, "translated_text"] = translated
+            
             translations_log.append({
                 "index": i,
                 "original": text,
@@ -96,7 +100,7 @@ class DatasetTranslator:
         df.to_csv(out_path, index=False, encoding="utf-8")
         self.generate_report(translations_log, output_dir, "DeepSeek API")
 
-        print(f"Tradução concluída. Arquivo salvo em {out_path}")
+        self.logger.info("Tradução concluída. Arquivo salvo em %s", out_path)
         return df, translations_log
 
     # -------------------------
@@ -107,7 +111,7 @@ class DatasetTranslator:
         if sample_size:
             df = df.head(sample_size)
 
-        print(f"Iniciando tradução de {len(df)} registros com Hugging Face Transformers...")
+        self.logger.info("Iniciando tradução de %d registros com Hugging Face Transformers...", len(df))
 
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         tokenizer = MarianTokenizer.from_pretrained(self.transformers_model)
@@ -138,7 +142,7 @@ class DatasetTranslator:
         ]
 
         self.generate_report(translations_log, output_dir, "Hugging Face Transformers")
-        print(f"Tradução concluída. Arquivo salvo em {out_path}")
+        self.logger.info("Tradução concluída. Arquivo salvo em %s", out_path)
         return df
 
     # -------------------------
@@ -164,14 +168,16 @@ class DatasetTranslator:
             f.write(f"Registros traduzidos: {len(translations_log)}\n")
             f.write(f"Termos sensíveis preservados: {total_terms}\n")
 
-        print(f"Relatório salvo em {report_path}")
+        self.logger.info("Relatório salvo em %s", report_path)
 
 
 # -------------------------
 # Execução
 # -------------------------
 def main():
-    API_KEY = "aaaaa"  # substitua pela sua key
+    load_dotenv()
+    API_KEY = os.getenv("API_KEY")
+
     INPUT_CSV = "../raw/hate_speech/datasets/hate_speech_offensive_language/archive/labeled_data.csv"
     OUTPUT_DIR = "./hate_speech_translated"
 
