@@ -1,0 +1,133 @@
+RELATÓRIO DE TRADUÇÃO - PLATAFORMA CÍVICA DIGITAL
+============================================================
+
+EXEMPLOS DE TRADUÇÃO (ANTES/DEPOIS):
+----------------------------------------
+
+Exemplo 1:
+ORIGINAL: !!! RT @mayasolovely: As a woman you shouldn't complain about cleaning up your house. &amp; as a man you should always take the trash out...
+TRADUZIDO: !!! RT @mayasolovely: Como mulher, você não deveria reclamar de limpar a sua casa. &amp; como homem, você sempre deveria tirar o lixo...
+TERMOS PRESERVADOS: ['RT']
+----------------------------------------
+
+Exemplo 2:
+ORIGINAL: !!!!! RT @mleew17: boy dats cold...tyga dwn bad for cuffin dat hoe in the 1st place!!
+TRADUZIDO: !!!!! RT @mleew17: mano que barra...tyga dwn bad por ter colocado essa hoe na corrente logo de cara!!
+TERMOS PRESERVADOS: ['RT']
+----------------------------------------
+
+Exemplo 3:
+ORIGINAL: !!!!!!! RT @UrKindOfBrand Dawg!!!! RT @80sbaby4life: You ever fuck a bitch and she start to cry? You be confused as shit
+TRADUZIDO: !!!!!!! RT @UrKindOfBrand Cara!!!! RT @80sbaby4life: Já transou com uma mina e ela começa a chorar? Você fica confuso pra caralho
+TERMOS PRESERVADOS: ['RT', 'RT']
+----------------------------------------
+
+Exemplo 4:
+ORIGINAL: !!!!!!!!! RT @C_G_Anderson: @viva_based she look like a tranny
+TRADUZIDO: !!!!!!!!! RT @C_G_Anderson: @viva_based ela parece uma traveco
+TERMOS PRESERVADOS: ['RT']
+----------------------------------------
+
+Exemplo 5:
+ORIGINAL: !!!!!!!!!!!!! RT @ShenikaRoberts: The shit you hear about me might be true or it might be faker than the bitch who told it to ya &#57361;
+TRADUZIDO: !!!!!!!!!!!!! RT @ShenikaRoberts: A merda que você ouve sobre mim pode ser verdade ou pode ser mais falsa que a vadia que te contou &#57361;
+TERMOS PRESERVADOS: ['RT']
+----------------------------------------
+
+Exemplo 6:
+ORIGINAL: !!!!!!!!!!!!!!!!!!"@T_Madison_x: The shit just blows me..claim you so faithful and down for somebody but still fucking with hoes! &#128514;&#128514;&#128514;"
+TRADUZIDO: "!!!!!!!!!!!!!!!!!!"@T_Madison_x: Essa merda simplesmente me surpreende... diz que é tão fiel e dedicado a alguém, mas ainda tá fodendo com putas! &#128514;&#128514;&#128514;""
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 7:
+ORIGINAL: !!!!!!"@__BrighterDays: I can not just sit up and HATE on another bitch .. I got too much shit going on!"
+TRADUZIDO: "!!!!!!"@__BrighterDays: Eu não posso simplesmente sentar e ODIAR outra vadia... Eu tenho muita merda acontecendo!"
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 8:
+ORIGINAL: !!!!&#8220;@selfiequeenbri: cause I'm tired of you big bitches coming for us skinny girls!!&#8221;
+TRADUZIDO: "!!!!&#8220;@selfiequeenbri: porque eu tô cansada de vocês, suas vadias gordas, virem pra cima de nós, garotas magras!!&#8221;"
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 9:
+ORIGINAL: " &amp; you might not get ya bitch back &amp; thats that "
+TRADUZIDO: &amp; você pode não ter sua puta de volta &amp; e é isso
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 10:
+ORIGINAL: " @rhythmixx_ :hobbies include: fighting Mariam"
+
+bitch
+TRADUZIDO: @rhythmixx_ :hobbies incluem: brigar com a Mariam
+
+vadia
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 11:
+ORIGINAL: " Keeks is a bitch she curves everyone " lol I walked into a conversation like this. Smh
+TRADUZIDO: "Keeks é uma vaca, ela dá perdido em todo mundo" kkk eu entrei numa conversa assim. Aff
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 12:
+ORIGINAL: " Murda Gang bitch its Gang Land "
+TRADUZIDO: "Murda Gang, vadia, é Terra de Gangue"
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 13:
+ORIGINAL: " So hoes that smoke are losers ? " yea ... go on IG
+TRADUZIDO: "Então vadias que fumam são perdedoras? é... vai no IG"
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 14:
+ORIGINAL: " bad bitches is the only thing that i like "
+TRADUZIDO: "bad bitches é a única coisa que eu gosto"
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 15:
+ORIGINAL: " bitch get up off me "
+TRADUZIDO: "Cai fora de mim, sua vaca"
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 16:
+ORIGINAL: " bitch nigga miss me with it "
+TRADUZIDO: Vai se foder, mano, para com essa porra
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 17:
+ORIGINAL: " bitch plz whatever "
+TRADUZIDO: vai se foder por favor tanto faz
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 18:
+ORIGINAL: " bitch who do you love "
+TRADUZIDO: "vadia, quem você ama"
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 19:
+ORIGINAL: " bitches get cut off everyday B "
+TRADUZIDO: vagabundas são cortadas todo dia B
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+Exemplo 20:
+ORIGINAL: " black bottle &amp; a bad bitch "
+TRADUZIDO: "garrafa preta &amp; uma vadia foda"
+TERMOS PRESERVADOS: []
+----------------------------------------
+
+RESUMO ESTATÍSTICO:
+Total de registros traduzidos: 20
+Total de termos sensíveis preservados: 6

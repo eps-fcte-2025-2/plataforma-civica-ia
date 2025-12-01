@@ -1,6 +1,36 @@
-# Datasets de Spam
+# Datasets de Spam e Tradução para Português
 
-Este diretório contém datasets públicos utilizados para treinar um classificador inicial de denúncias em apostas esportivas para a plataforma Apita Cidadão. Tendo como objetivo inicial filtrar denúncias que não se encaixam no padrão pretendido, sejam eslas spam ou denuncias falsas, esse treinamento inicial tem o objetivo de classificar essas denúncias antes de enviar para o banco de dados.
+Este diretório contém datasets públicos utilizados para treinar um classificador inicial de denúncias em apostas esportivas para a plataforma **Apita Cidadão**. O objetivo inicial é filtrar denúncias que não se encaixam no padrão pretendido, sejam elas spam ou denúncias falsas, classificando-as antes de inserir no banco de dados.
+
+Além disso, incluímos **um módulo de tradução de datasets** para português, preservando termos sensíveis como siglas, nomes jurídicos e técnicos, permitindo que o modelo aprenda o contexto local sem perder vocabulário importante.
+
+---
+
+## Funcionalidade de Tradução
+
+O código desenvolvido implementa:
+
+* **Tradução automática de datasets** para português brasileiro.
+* **Preservação de termos sensíveis** (siglas, órgãos, leis, nomes próprios) usando placeholders durante a tradução.
+* **Suporte a múltiplas fontes**:
+
+  * API LLM (DeepSeek) para traduções contextuais avançadas.
+  * Hugging Face Transformers (`MarianMT`) para tradução local e escalável.
+* **Geração de relatório** com exemplos de tradução antes/depois e checagem de preservação de termos sensíveis.
+* **Configuração de GPU/CPU automática** quando usando Hugging Face.
+* **Controle de tamanho do dataset para testes** (sample_size).
+
+### Critérios de Aceitação da Tradução
+
+* Dataset traduzido salvo em `/data/translated/`.
+* Relatório gerado em `/data/translated/relatorio_traducao.txt` contendo:
+  * 20 exemplos de antes/depois.
+  * Termos sensíveis preservados.
+  * Estatísticas de preservação de termos.
+
+
+---
+
 
 ## Tabela de Datasets Catalogados
 
@@ -39,14 +69,19 @@ Este diretório contém datasets públicos utilizados para treinar um classifica
 - `/data/raw/Spam-Email-Classifier-DataSet/` → Spam-Email-Classifier-DataSet
 - `/data/raw/SMS_PHISHING_DATASET/` → SMS_PHISHING_DATASET
 - `/data/raw/LIAR-PLUS/` → LIAR-PLUS
+- `/data/translated/` → datasets traduzidos e relatórios de tradução
+
 
 ---
 
 ## Histórico de Versão
 
-| Data       | Versão | Descrição                               | Autor                                                    | Revisor                                                  |
-| ---------- | ------ | --------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| 2025-09-30 | 1.0    | Criação inicial do catálogo de datasets | [Gabriel Campello Marques](https://github.com/G16C)      | [Rafael Ferreira Lenadro](https://github.com/RafaelCLG0) |
-| 2025-09-30 | 1.1    | Adição de mais datasets                 | [Geovanna Maciel](https://github.com/manuziny)           | [Matheus Henrique](https://github.com/mathonaut)         |
-| 2025-09-30 | 1.2    | Adição de datasets                      | [Rafael Ferreira Lenadro](https://github.com/RafaelCLG0) | [Gabriel Campello Marques](https://github.com/G16C)      |
-| 2025-09-30 | 1.3    | Adição do dataset LIAR-PLUS             | [Matheus Henrique](https://github.com/mathonaut)         | [Gabriel Campello Marques](https://github.com/G16C)      |
+| Data       | Versão | Descrição                                  | Autor                                                    | Revisor                                                  |
+| ---------- | ------ | ------------------------------------------ | -------------------------------------------------------- | -------------------------------------------------------- |
+| 2025-09-30 | 1.0    | Criação inicial do catálogo de datasets    | [Gabriel Campello Marques](https://github.com/G16C)      | [Rafael Ferreira Lenadro](https://github.com/RafaelCLG0) |
+| 2025-09-30 | 1.1    | Adição de mais datasets                    | [Geovanna Maciel](https://github.com/manuziny)           | [Matheus Henrique](https://github.com/mathonaut)         |
+| 2025-09-30 | 1.2    | Adição de datasets                         | [Rafael Ferreira Lenadro](https://github.com/RafaelCLG0) | [Gabriel Campello Marques](https://github.com/G16C)      |
+| 2025-09-30 | 1.3    | Adição do dataset LIAR-PLUS                | [Matheus Henrique](https://github.com/mathonaut)         | [Gabriel Campello Marques](https://github.com/G16C)      |
+| 2025-10-09 | 1.4    | Inclusão do módulo de tradução de datasets | [Douglas Alves](https://github.com/dougalvs), [Arthur Grandão](https://github.com/arthurgrandao), [Milena Baruc](https://github.com/MilenaBaruc), [Cainã Valença](https://github.com/freitasc)                                              | [Gabriel Campello Marques](https://github.com/G16C)      |
+
+---
