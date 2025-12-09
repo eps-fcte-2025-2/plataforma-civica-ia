@@ -1,8 +1,55 @@
-# Chatbot Apita Cidadão (Grupo 28 e 13)
+# Chatbot Apita Cidadão (Grupo 28 e 13 e 3)
 
 O projeto implementa um Assistente Jurídico utilizando arquitetura RAG (Retrieval-Augmented Generation) avançada, orquestrada via LangGraph.
 
 **Nota:** Os códigos presentes nas pastas de `backend` e `frontend` servem como uma prova de conceito (PoC) para demonstrar o funcionamento do fluxo conversacional e da recuperação de documentos. O objetivo final é a integração da lógica deste agente (grafo e nós) à infraestrutura existente da plataforma.
+
+## 🐳 Início Rápido com Docker
+
+### Opção 1: Com Ollama Externo (Recomendado)
+
+Se você já tem um servidor Ollama rodando:
+
+```bash
+# 1. Configure o arquivo .env na raiz
+cat > .env << EOF
+OLLAMA_API_URL=https://seu-servidor-ollama.com
+LLM_MODEL_NAME=llama3.1:8b-instruct-fp16
+EMBEDDINGS_MODEL_NAME=Q78KG/gte-Qwen2-7B-instruct:latest
+DB_CONNECTION=postgresql+psycopg://postgres:postgres@postgres:5432/apita_db
+COLLECTION_NAME=legal_documents
+POSTGRES_DB=apita_db
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+EOF
+
+# 2. Inicie serviços (SEM Ollama local)
+docker compose up -d postgres backend frontend
+
+# 3. Popular banco de dados
+docker compose exec backend python indexing_pipeline.py
+
+# 4. Acessar aplicação
+# Frontend: http://localhost
+# Backend API: http://localhost:8000
+# Docs: http://localhost:8000/docs
+```
+
+### Opção 2: Com Ollama Local
+
+```bash
+# 1. Iniciar TODOS os serviços (incluindo Ollama)
+docker compose up -d --build
+
+# 2. Baixar modelos de IA
+docker exec -it chatbot-ollama ollama pull gpt-oss:20b
+docker exec -it chatbot-ollama ollama pull mxbai-embed-large
+
+# 3. Popular banco de dados
+docker exec -it chatbot-backend python indexing_pipeline.py
+
+# 4. Acessar aplicação em http://localhost
+```
 
 ## Arquitetura do Agente
 
@@ -94,7 +141,15 @@ Execute o pipeline para popular o banco de dados:
 python indexing_pipeline.py
 ```
 
-**Nota sobre a Base de Conhecimento**: O script de exemplo (indexing_pipeline.py) implementa um processo ETL simplificado que indexa apenas 5 normas federais específicas para fins de demonstração. Em um cenário de produção, é mandatório escalar este pipeline para ingerir um volume abrangente de legislação, garantindo que o agente de IA tenha respaldo jurídico suficiente para cobrir todos os tópicos esperados pela plataforma.
+**Nota sobre a Base de Conhecimento**: O script de exemplo (indexing_pipeline.py) implementa um processo ETL simplificado que indexa 5 normas federais específicas:
+
+1. Lei 13.756/2018 (Fundo Nacional de Segurança e Loterias)
+2. Lei 14.790/2023 (Apostas Esportivas / Bets)
+3. Decreto 11.935/2024 (Regulamentação das Apostas)
+4. Lei Pelé (Lei 9.615/1998)
+5. Lei Anticorrupção (Lei 12.846/2013)
+
+Em um cenário de produção, é mandatório escalar este pipeline para ingerir um volume abrangente de legislação, garantindo que o agente de IA tenha respaldo jurídico suficiente para cobrir todos os tópicos esperados pela plataforma.
 
 ## Execução
 

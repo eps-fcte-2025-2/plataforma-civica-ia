@@ -1,0 +1,19 @@
+# Variáveis de ambiente
+.env
+.env.local
+.env.*.local
+
+# Dados de volumes Docker
+postgres_data/
+ollama_data/
+
+# Logs
+*.log
+
+# Backups
+*.sql
+backup/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -15,7 +15,10 @@ engine = create_async_engine(DB_CONNECTION)
 
 
 def get_embeddings():
-    return OllamaEmbeddings(model=EMBEDDINGS_MODEL_NAME)
+    return OllamaEmbeddings(
+        model=EMBEDDINGS_MODEL_NAME,
+        base_url=OLLAMA_API_URL
+    )
 
 
 def get_llm(temperature=0):

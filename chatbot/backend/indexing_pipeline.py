@@ -67,8 +67,17 @@ async def pipeline(urls: list[dict[str, str]], chunk_size: int, chunk_overlap: i
 
     if chunks:
         print("Inserindo chunks no PostgreSQL via PGVector...")
-        await vector_store.aadd_documents(chunks)
-        print("Inserção concluída.")
+        
+        # Processar em lotes para evitar timeout
+        batch_size = 50
+        total_chunks = len(chunks)
+        
+        for i in range(0, total_chunks, batch_size):
+            batch = chunks[i:i + batch_size]
+            print(f"Processando lote {i//batch_size + 1}/{(total_chunks + batch_size - 1)//batch_size} ({len(batch)} chunks)...")
+            await vector_store.aadd_documents(batch)
+        
+        print(f"✅ Inserção concluída! Total: {total_chunks} chunks indexados.")
     else:
         print("Nenhum chunk para inserir.")
 
