@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  # Banco de dados PostgreSQL com extensão pgvector
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: chatbot-postgres
+    environment:
+      POSTGRES_DB: apita_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - chatbot-network
+
+  # Ollama - Servidor de modelos de IA (OPCIONAL)
+  # Comente todo este serviço se estiver usando um endpoint Ollama externo
+  ollama:
+    image: ollama/ollama:latest
+    container_name: chatbot-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - chatbot-network
+    # Descomentar as linhas abaixo se você tiver GPU NVIDIA
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    profiles:
+      - with-ollama  # Use este profile para ativar: docker-compose --profile with-ollama up
+
+  # Backend FastAPI
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: chatbot-backend
+    environment:
+      DB_CONNECTION: postgresql+psycopg://postgres:postgres@postgres:5432/apita_db
+      COLLECTION_NAME: legal_documents
+      LLM_MODEL_NAME: ${LLM_MODEL_NAME:-gpt-oss:20b}
+      EMBEDDINGS_MODEL_NAME: ${EMBEDDINGS_MODEL_NAME:-mxbai-embed-large}
+      OLLAMA_API_URL: ${OLLAMA_API_URL:-http://ollama:11434}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      # ollama:
+      #   condition: service_started
+      # ^ Comente se estiver usando Ollama externo
+    volumes:
+      - ./backend:/app
+    networks:
+      - chatbot-network
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Frontend React
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+    container_name: chatbot-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - chatbot-network
+
+volumes:
+  postgres_data:
+    driver: local
+  ollama_data:
+    driver: local
+
+networks:
+  chatbot-network:
+    driver: bridge

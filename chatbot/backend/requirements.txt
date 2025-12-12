@@ -1,0 +1,15 @@
+langchain>=0.3.0
+langchain-core
+langchain-community
+langgraph
+langchain-ollama
+langchain-postgres
+sqlalchemy>=2.0.0 
+psycopg[binary,pool]
+fastapi
+uvicorn[standard]
+pydantic>=2.0.0
+python-dotenv
+beautifulsoup4
+requests
+sentence-transformers
